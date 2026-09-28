@@ -1,0 +1,9 @@
+{
+  "name": "GNO BABY - ระบบตั้งชื่อเด็กตามวันเกิดและราศี",
+  "description": "เว็บแอปพลิเคชันแนะนำชื่อเด็กภาษาไทยมงคลตามวันเกิด ราศี และเพศ ด้วยหลักทักษาปกรณ์ พร้อมระบบสมาชิกและแดชบอร์ดแอดมิน",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
+

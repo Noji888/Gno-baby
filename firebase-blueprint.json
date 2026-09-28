@@ -1,0 +1,128 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with Member ID and role",
+      "type": "object",
+      "properties": {
+        "memberId": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 100 },
+        "name": { "type": "string", "maxLength": 100 },
+        "nickname": { "type": "string", "maxLength": 50 },
+        "role": { "type": "string", "enum": ["member", "admin"] },
+        "avatar": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 20 },
+        "expectedDueDate": { "type": "string", "maxLength": 30 },
+        "status": { "type": "string", "enum": ["active", "suspended"] },
+        "createdAt": { "type": "string" },
+        "lastLoginAt": { "type": "string" }
+      },
+      "required": ["memberId", "email", "name", "role", "status"]
+    },
+    "BabyName": {
+      "title": "BabyName",
+      "description": "Thai baby name with meaning, gender, thaksa, and zodiac",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 60 },
+        "reading": { "type": "string", "maxLength": 100 },
+        "meaning": { "type": "string", "maxLength": 300 },
+        "gender": { "type": "string", "enum": ["boy", "girl", "unspecified"] },
+        "startingLetter": { "type": "string", "maxLength": 10 },
+        "syllables": { "type": "number" },
+        "category": { "type": "string", "maxLength": 50 },
+        "zodiacSign": { "type": "string", "maxLength": 50 },
+        "searchCount": { "type": "number" },
+        "favoriteCount": { "type": "number" },
+        "origin": { "type": "string", "maxLength": 200 },
+        "thaksaNotes": { "type": "string", "maxLength": 300 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "reading", "meaning", "gender", "startingLetter", "syllables", "category"]
+    },
+    "Favorite": {
+      "title": "Favorite",
+      "description": "User favorite baby name link",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "babyNameId": { "type": "string", "maxLength": 128 },
+        "note": { "type": "string", "maxLength": 300 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "babyNameId", "createdAt"]
+    },
+    "SearchHistory": {
+      "title": "SearchHistory",
+      "description": "Search log for user query",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "gender": { "type": "string", "maxLength": 20 },
+        "birthDate": { "type": "string", "maxLength": 30 },
+        "dayOfWeek": { "type": "string", "maxLength": 30 },
+        "zodiac": { "type": "string", "maxLength": 50 },
+        "startingLetter": { "type": "string", "maxLength": 10 },
+        "syllables": { "type": "number" },
+        "category": { "type": "string", "maxLength": 50 },
+        "keyword": { "type": "string", "maxLength": 100 },
+        "resultsCount": { "type": "number" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["userId", "timestamp"]
+    },
+    "AdminLog": {
+      "title": "AdminLog",
+      "description": "Auditing activity logs for admin actions",
+      "type": "object",
+      "properties": {
+        "adminId": { "type": "string", "maxLength": 128 },
+        "adminName": { "type": "string", "maxLength": 100 },
+        "action": { "type": "string", "maxLength": 100 },
+        "details": { "type": "string", "maxLength": 500 },
+        "target": { "type": "string", "maxLength": 128 },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["adminId", "action", "timestamp"]
+    },
+    "SystemSetting": {
+      "title": "SystemSetting",
+      "description": "App configuration",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string", "maxLength": 100 },
+        "contactEmail": { "type": "string", "maxLength": 100 },
+        "itemsPerPage": { "type": "number" },
+        "maintenanceMode": { "type": "boolean" },
+        "disclaimerText": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["siteName", "disclaimerText"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/baby_names/{nameId}": {
+      "schema": "BabyName",
+      "description": "Database of baby names"
+    },
+    "/favorites/{favoriteId}": {
+      "schema": "Favorite",
+      "description": "Saved favorite names"
+    },
+    "/search_history/{historyId}": {
+      "schema": "SearchHistory",
+      "description": "History of user searches"
+    },
+    "/admin_logs/{logId}": {
+      "schema": "AdminLog",
+      "description": "Audit trails for admin operations"
+    },
+    "/system_settings/{settingId}": {
+      "schema": "SystemSetting",
+      "description": "Global application settings"
+    }
+  }
+}
